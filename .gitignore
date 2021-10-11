@@ -1,0 +1,8 @@
+.DS_Store
+node_modules
+.env
+package-lock.json
+
+# Vim
+.*.sw?
+*.session

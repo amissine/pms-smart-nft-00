@@ -1,0 +1,29 @@
+{
+  "name": "pms-smart-nft-00",
+  "version": "1.0.0",
+  "description": "Poor Man's Sandbox: drop 00 of Smart NFTs is code named 'Escalated Royalties'.",
+  "scripts": {
+    "ava": "export $(cat .env|tr -d [:blank:]|xargs) && ava --verbose --watch test/*.test.mjs",
+    "init": "npx envdist",
+    "pretest": "npm i && npm run init",
+    "test": "ttab -w -d $PWD exec npm run ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amissine/pms-smart-nft-00.git"
+  },
+  "keywords": [],
+  "author": "Alec Missine",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/amissine/pms-smart-nft-00/issues"
+  },
+  "homepage": "https://github.com/amissine/pms-smart-nft-00#readme",
+  "dependencies": {
+    "stellar-sdk": "^9.0.1"
+  },
+  "devDependencies": {
+    "ava": "^3.15.0",
+    "ttab": "^0.7.1"
+  }
+}
