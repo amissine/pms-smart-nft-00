@@ -13,18 +13,21 @@ const SmartNFT = config.smartNFT
 const server = config.server
 
 export default async (body) => { // {{{1
-  const { source: userPK } = body
+  const { source: userPK } = body // {{{2
 
-  const owners = await server
+  const owners = await server // {{{2
     .trades()
     .forAssetPair(SmartNFT, Asset.native())
     .limit(limit)
     .order('desc')
     .call()
-    .then(({ records }) => records.map(record => 'counter_account'))
+    .then(({ records }) => records.map(record => record.counter_account))
     .catch(() => [])
+  /* See also:
+   * - https://developers.stellar.org/api/resources/trades/list/
+   */
 
-  const interval = await server
+  const interval = await server // {{{2
     .assets()
     .forCode(SmartNFT.code)
     .forIssuer(SmartNFT.issuer)
