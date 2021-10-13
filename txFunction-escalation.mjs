@@ -11,6 +11,7 @@ const limit = config.ESCALATE_MAX // {{{1
 const issuerPK = config.ISSUER
 const SmartNFT = config.smartNFT
 const server = config.server
+const STELLAR_NETWORK = config.STELLAR_NETWORK
 
 export default async (body) => { // {{{1
   const { source: userPK } = body // {{{2
@@ -36,20 +37,25 @@ export default async (body) => { // {{{1
     .then(({ records: [record] }) =>
       new BigNumber(record?.balances?.unauthorized ?? 0).toFixed(0, 3)
     )
+  /* See also:
+   * - https://developers.stellar.org/api/resources/assets/list/
+   * - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator
+   * - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+   */
 
-  return server.loadAccount(issuerPK).then((account) => {
-    let transaction = new TransactionBuilder(account, {
+  return server.loadAccount(issuerPK).then((account) => { // {{{2
+    let transaction = new TransactionBuilder(account, { // {{{3
       fee: '0',
       networkPassphrase: Networks[STELLAR_NETWORK]
     })
-      .addOperation(
+      .addOperation( // Operation.changeTrust {{{3
         Operation.changeTrust({
           asset: SmartNFT,
           limit: '1',
           source: userPK
         })
       )
-      .addOperation(
+      .addOperation( // Operation.setTrustLineFlags {{{3
         Operation.setTrustLineFlags({
           asset: SmartNFT,
           trustor: userPK,
@@ -58,7 +64,7 @@ export default async (body) => { // {{{1
           }
         })
       )
-      .addOperation(
+      .addOperation( // Operation.manageSellOffer {{{3
         Operation.manageSellOffer({
           selling: SmartNFT,
           buying: Asset.native(),
@@ -66,7 +72,7 @@ export default async (body) => { // {{{1
           price: '0.0000001'
         })
       )
-      .addOperation(
+      .addOperation( // Operation.manageBuyOffer {{{3
         Operation.manageBuyOffer({
           selling: Asset.native(),
           buying: SmartNFT,
@@ -75,7 +81,7 @@ export default async (body) => { // {{{1
           source: userPK
         })
       )
-      .addOperation(
+      .addOperation( // Operation.setTrustLineFlags {{{3
         Operation.setTrustLineFlags({
           asset: SmartNFT,
           trustor: userPK,
@@ -85,7 +91,7 @@ export default async (body) => { // {{{1
         })
       )
 
-    owners.forEach((address) => {
+    owners.forEach((address) => { // {{{3
       const amount = new BigNumber(interval).div(limit).pow(2).toFixed(0, 2)
 
       transaction.addOperation(
@@ -98,8 +104,9 @@ export default async (body) => { // {{{1
       )
     })
 
+    // }}}3
     transaction = transaction.setTimeout(0).build()
 
     return transaction.toXDR()
-  })
+  }) // }}}2
 }

@@ -1,0 +1,77 @@
+import test from 'ava' // {{{1
+import { Asset, Keypair, Networks, TransactionBuilder, } from 'stellar-base'
+import BigNumber from 'bignumber.js'
+import fetch from 'node-fetch'
+
+const HORIZON_URL = process.env.HORIZON_URL // {{{1
+const STELLAR_NETWORK = process.env.STELLAR_NETWORK
+const issuerPK = process.env.ISSUER
+const userPK = process.env.USER
+const asset = 'SmartNFT00'
+const SmartNFT = new Asset(asset, issuerPK)
+const MAX_LIMIT = 200 // no more for trades
+
+test('Use TESTNET', t => { // {{{1
+  t.true(
+    HORIZON_URL == 'https://horizon-testnet.stellar.org'
+    && STELLAR_NETWORK == 'TESTNET'
+  )
+})
+
+/*test('Check the number of SmartNFT00 owners', async t => { // {{{1
+  let url = `${HORIZON_URL}/trades?base_asset_type=credit_alphanum12`
+  url += `&base_asset_issuer=${issuerPK}&base_asset_code=${asset}`
+  url += `&counter_asset_type=native&limit=${MAX_LIMIT}`
+
+  const owners = await fetch(url)
+  .then(async response => { const json = await response.json(); console.log(json); return json; })
+  .then(({ records }) => records.map(record => record.counter_account))
+  .catch(err => console.error(err))
+  ?? []
+
+  console.log(owners.length)
+
+  t.true(owners.length > -1)
+})
+
+test('Check the interval of SmartNFT00', async t => { // {{{1
+  let url = `${HORIZON_URL}/assets?limit=1`
+  url += `&asset_code=${SmartNFT.code}&asset_issuer=${SmartNFT.issuer}`
+
+  const interval = await fetch(url)
+  .then(async response => { const json = await response.json(); console.log(json); return json; })
+  .then(({ _embedded: { records }}) => 
+    records[0] ? new BigNumber(records[0].balances?.unauthorized ?? 0).toFixed(0, 3)
+    : new BigNumber(0)
+  )
+
+  console.log(interval.toString())
+
+  t.is(1, 1)
+})
+*/
+
+test('Load issuerPK', async t => { // {{{1
+  let url = `${HORIZON_URL}/accounts/${issuerPK}`
+
+  const xdr = await fetch(url)
+  .then(async response => { const json = await response.json(); console.log(json); return json; })
+  .then(account => {
+    
+    let transaction = new TransactionBuilder(account, { 
+      fee: '0',
+      networkPassphrase: Networks[STELLAR_NETWORK]
+    })
+
+    transaction = transaction.setTimeout(0).buildWithoutIncrementingSequenceNumber()
+
+    return transaction.toXDR()
+  })
+
+  console.log(xdr)
+
+  t.is(1, 1)
+})
+/* See also:
+ * - https://developers.stellar.org/api/resources/accounts/single/
+ */

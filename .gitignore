@@ -3,6 +3,9 @@ node_modules
 .env
 package-lock.json
 
+# Add buildWithoutIncrementingSequenceNumber
+transaction_builder.js.copy
+
 # Vim
 .*.sw?
 *.session
