@@ -6,8 +6,11 @@
     "ava": "export $(cat .env|tr -d [:blank:]|xargs) && ava --verbose --watch test/*.test.mjs",
     "dist": "esbuild ./txFunction-escalation.mjs --bundle --format=esm --external:bignumber.js --external:stellar-sdk --minify --outfile=./dist/txFunction-escalation.mjs",
     "init": "npx envdist && [ -e transaction_builder.js ] && mv transaction_builder.js node_modules/stellar-base/lib/",
+    "prestart": "npm i && npx envdist",
+    "start": "ttab -w -d $PWD exec npm run www",
     "pretest": "npm i && npm run init",
-    "test": "ttab -w -d $PWD exec npm run ava"
+    "test": "ttab -w -d $PWD exec npm run ava",
+    "www": "export $(cat .env|tr -d [:blank:]|xargs) && node --trace-warnings bin/www.mjs || read"
   },
   "repository": {
     "type": "git",
@@ -21,6 +24,9 @@
   },
   "homepage": "https://github.com/amissine/pms-smart-nft-00#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "moment": "^2.29.1",
     "node-fetch": "^3.0.0",
     "stellar-sdk": "^9.0.1"
   },
