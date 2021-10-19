@@ -6,7 +6,7 @@
     "ava": "export $(cat .env|tr -d [:blank:]|xargs) && ava --verbose --watch test/*.test.mjs",
     "dist": "esbuild ./txFunction-escalation.mjs --bundle --format=esm --external:bignumber.js --external:stellar-sdk --minify --outfile=./dist/txFunction-escalation.mjs",
     "init": "npm run update $1 $2",
-    "prestart": "npm i && npx envdist",
+    "prestart": "npm i && cp .env.dist.template .env.dist && npx envdist",
     "start": "ttab -w -d $PWD exec npm run www",
     "pretest": "npm i && npm run init",
     "test": "ttab -w -d $PWD exec npm run ava",

@@ -25,7 +25,7 @@ To update `TXF_CREATOR` and `TXF_CREATOR_SECRET` in `./.env`, first make sure th
 TXF_CREATOR = <Stellar public key>
 ```
 
-, as the update will add the default value to it.
+, as the update will add the default value to it. See also [Update user keys](#update-user-keys).
 
 When this is done,
 
@@ -33,17 +33,9 @@ When this is done,
 npm run update G... S...
 ```
 ## Update user keys
-To update `TXF_CREATOR` and `TXF_CREATOR_SECRET` in `./.env`, first make sure these lines are absent in the file, and have no default values (do not end with ` # ...`) in `./.env.dist.template`. Also, make sure that:
+To update `USER` and `USER_SECRET` in `./.env`, first make sure these lines are absent in the file, and have no default values (do not end with ` # ...`) in `./.env.dist.template`. 
 
-- the `TXF_CREATOR` line is absent in `../stellar-smart-contracts/.env`; and
-
-- the `TXF_CREATOR` line in `../stellar-smart-contracts/.env.dist.template` has no default value (does not end with ` # G...`) and  looks exactly like this:
-
-```
-TXF_CREATOR = <Stellar public key>
-```
-
-, as the update will add the default value to it. See also [Update creator keys](#update-creator-keys).
+See also [Update creator keys](#update-creator-keys).
 
 When this is done,
 
