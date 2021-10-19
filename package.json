@@ -5,11 +5,12 @@
   "scripts": {
     "ava": "export $(cat .env|tr -d [:blank:]|xargs) && ava --verbose --watch test/*.test.mjs",
     "dist": "esbuild ./txFunction-escalation.mjs --bundle --format=esm --external:bignumber.js --external:stellar-sdk --minify --outfile=./dist/txFunction-escalation.mjs",
-    "init": "npx envdist && [ -e transaction_builder.js ] && mv transaction_builder.js node_modules/stellar-base/lib/",
+    "init": "npm run update $1 $2",
     "prestart": "npm i && npx envdist",
     "start": "ttab -w -d $PWD exec npm run www",
     "pretest": "npm i && npm run init",
     "test": "ttab -w -d $PWD exec npm run ava",
+    "update": "./update_TXF_CREATOR.sh && ./update_USER.sh",
     "www": "export $(cat .env|tr -d [:blank:]|xargs) && node --trace-warnings bin/www.mjs || read"
   },
   "repository": {
