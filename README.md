@@ -11,7 +11,7 @@ Poor Man's Sandbox: drop 00 of Smart NFTs is code named â€œEscalated Royaltiesâ€
 Make sure `../stellar-smart-contracts/` exists, then
 
 ```bash
-npm run init [ G... S... ]
+npm run init
 ```
 
 ## Update creator keys
