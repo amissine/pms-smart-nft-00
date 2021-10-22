@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Poor Man's Sandbox: drop 00 of Smart NFTs is code named 'Escalated Royalties'.",
   "scripts": {
-    "ava": "ava --verbose --watch test/*.test.mjs",
+    "ava": "export $(cat .env|tr -d [:blank:]|xargs) && ava --verbose --watch test/*.test.mjs",
     "dist": "esbuild ./txFunction-escalation.mjs --bundle --format=esm --external:bignumber.js --external:stellar-sdk --minify --outfile=./dist/txFunction-escalation.mjs",
     "init": "cp ./.env.dist.template ./.env.dist && envdist && ./init.sh",
     "start": "ttab -w -d $PWD exec npm run www",

@@ -210,11 +210,11 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 3 - ((2 * winheight(0) + 7) / 15)
+let s:l = 1 - ((0 * winheight(0) + 7) / 15)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-3
+1
 normal! 0
 wincmd w
 argglobal
@@ -460,12 +460,12 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 12 - ((7 * winheight(0) + 7) / 14)
+let s:l = 5 - ((0 * winheight(0) + 7) / 14)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-12
-normal! 013|
+5
+normal! 014|
 wincmd w
 argglobal
 if bufexists("README.md") | buffer README.md | else | edit README.md | endif
@@ -1682,12 +1682,12 @@ setlocal wrapmargin=0
 normal! zo
 13
 normal! zo
-let s:l = 14 - ((13 * winheight(0) + 11) / 22)
+let s:l = 18 - ((17 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-14
-normal! 022|
+18
+normal! 09|
 wincmd w
 argglobal
 if bufexists("src/stellar-smart-contract-utils.mjs") | buffer src/stellar-smart-contract-utils.mjs | else | edit src/stellar-smart-contract-utils.mjs | endif
@@ -1934,15 +1934,17 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
+1
+normal! zo
 3
 normal! zo
 8
 normal! zo
-let s:l = 8 - ((7 * winheight(0) + 11) / 22)
+let s:l = 1 - ((0 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-8
+1
 normal! 0
 wincmd w
 exe '1resize ' . ((&lines * 23 + 24) / 49)
@@ -2363,13 +2365,19 @@ setlocal wrap
 setlocal wrapmargin=0
 1
 normal! zo
-4
+6
 normal! zo
-let s:l = 10 - ((9 * winheight(0) + 11) / 23)
+14
+normal! zo
+6
+normal! zc
+13
+normal! zo
+let s:l = 27 - ((26 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-10
+27
 normal! 0
 wincmd w
 exe 'vert 1resize ' . ((&columns * 89 + 89) / 179)
@@ -2510,16 +2518,14 @@ normal! zo
 normal! zo
 11
 normal! zo
-10
-normal! zc
 25
 normal! zo
-let s:l = 6 - ((5 * winheight(0) + 23) / 47)
+let s:l = 10 - ((9 * winheight(0) + 23) / 47)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-6
-normal! 078|
+10
+normal! 0
 tabnext 1
 set stal=1
 badd +1 .env
@@ -2527,7 +2533,7 @@ badd +1 package.json
 badd +1 config.mjs.dist
 badd +1 src/config.mjs
 badd +1 txFunction-escalation.mjs
-badd +77 test/aux-base.test.mjs.skip
+badd +1 test/aux.test.mjs
 badd +1 .env.dist
 badd +1 README.md
 badd +1 .env.dist.template
@@ -2542,11 +2548,11 @@ badd +1 src/index.mjs
 badd +1 test/aux-base.test.mjs
 badd +1 config.mjs
 badd +1 test/txFunction-escalation.test.mjs
+badd +77 test/aux-base.test.mjs.skip
 badd +1 update-user.sh
 badd +2 update_USER.sh
 badd +2 tmp.txt
 badd +1 dist/txFunction-escalation.mjs
-badd +1 test/aux.test.mjs
 badd +1 txFunction-escalation.js
 badd +306 node_modules/stellar-base/lib/transaction_builder.js
 badd +352 transaction_builder.js
