@@ -1,0 +1,19 @@
+import { Asset, Server } from 'stellar-sdk' // {{{1
+
+let config = { // {{{1
+  ESCALATE_MAX: 95,
+  HORIZON_URL: '${HORIZON_URL}',
+  ISSUER: '${ISSUER}',
+  ISSUER_SECRET: '${ISSUER_SECRET}',
+  STELLAR_NETWORK: '${STELLAR_NETWORK}',
+  TXF_AGENT: '${TXF_AGENT}',
+  TXF_CREATOR: '${TXF_CREATOR}',
+  TXF_CREATOR_SECRET: '${TXF_CREATOR_SECRET}',
+  USER: '${USER}',
+  USER_SECRET: '${USER_SECRET}',
+  server: new Server('${HORIZON_URL}'),
+  smartNFT: new Asset('SmartNFT00', '${ISSUER}'),
+}
+
+// }}}1
+export { config }

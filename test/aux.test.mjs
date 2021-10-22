@@ -1,8 +1,9 @@
 import test from 'ava' // {{{1
 import { Asset, Server } from 'stellar-sdk'
 import BigNumber from 'bignumber.js'
+import { config } from '../config.mjs'
 
-const server = new Server('https://horizon.stellar.org')
+const server = new Server('https://horizon.stellar.org') // PUBLIC network !!!
 const issuerPK = 'GCRHEEBJQ5FLJPHIGIQWJ7YLBT64MK7TS7W4K7PDIZQC5HCFN7KVKOWF'
 const SmartNFT = new Asset('SmartNFT00', issuerPK)
 
@@ -22,7 +23,7 @@ test('Check the number of SmartNFT00 owners', async t => { // {{{1
 })
 
 test('Check the interval of SmartNFT00', async t => { // {{{1
-  const interval = await server // {{{2
+  const interval = await server
     .assets()
     .forCode(SmartNFT.code)
     .forIssuer(SmartNFT.issuer)

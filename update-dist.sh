@@ -24,5 +24,7 @@ then
 else
   update-dist $GK $GV $SK $SV
   envdist
+  export $(cat .env|tr -d [:blank:]|xargs)
+  envsubst < ./config.mjs.dist > ./config.mjs
 fi
 
