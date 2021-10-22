@@ -33,7 +33,7 @@ else
   update-dist $GK $GV $SK $SV
   envdist
   export $(cat .env|tr -d [:blank:]|xargs)
-  envsubst < ./wrangler.toml.dist > ./wrangler.toml
+  envsubst < ./config.mjs.dist > ./config.mjs
 fi
 
 # Make sure the $GK line is absent in $SSC/.env, and {{{1

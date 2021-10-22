@@ -3,9 +3,8 @@ node_modules
 .env
 package-lock.json
 dist
-
-# Add buildWithoutIncrementingSequenceNumber
-transaction_builder.js.copy
+.env.dist
+config.mjs
 
 # Vim
 .*.sw?
