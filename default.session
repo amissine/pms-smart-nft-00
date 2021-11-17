@@ -1008,7 +1008,7 @@ setlocal wrap
 setlocal wrapmargin=0
 3
 normal! zo
-let s:l = 9 - ((8 * winheight(0) + 9) / 18)
+let s:l = 9 - ((0 * winheight(0) + 9) / 18)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -1260,12 +1260,12 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 6 - ((5 * winheight(0) + 7) / 15)
+let s:l = 3 - ((2 * winheight(0) + 7) / 15)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-6
-normal! 0
+3
+normal! 013|
 wincmd w
 argglobal
 if bufexists("init.sh") | buffer init.sh | else | edit init.sh | endif
@@ -1525,7 +1525,6 @@ normal! zt
 27
 normal! 03|
 wincmd w
-3wincmd w
 exe '1resize ' . ((&lines * 18 + 24) / 49)
 exe 'vert 1resize ' . ((&columns * 89 + 89) / 179)
 exe '2resize ' . ((&lines * 27 + 24) / 49)
@@ -2656,7 +2655,7 @@ exe s:l
 normal! zt
 10
 normal! 0
-tabnext 2
+tabnext 1
 set stal=1
 badd +1 .env
 badd +1 package.json
@@ -2670,10 +2669,11 @@ badd +1 .env.dist.template
 badd +3 update_TXF_CREATOR.sh
 badd +1 .gitignore
 badd +1 update-template.sh
+badd +0 test/it1.sh
 badd +1 init.sh
 badd +1 update-dist.sh
 badd +1 bin/www.mjs
-badd +0 src/stellar-smart-contract-utils.mjs
+badd +1 src/stellar-smart-contract-utils.mjs
 badd +1 src/index.mjs
 badd +1 test/aux-base.test.mjs
 badd +1 config.mjs
@@ -2689,7 +2689,6 @@ badd +352 transaction_builder.js
 badd +5 update-agent.sh
 badd +1 update-creator.sh
 badd +2 tmp
-badd +0 test/it1.sh
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif
